@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quart AI App</title>
+    <style>
+        body{
+            background-color: rgb(131, 131, 202);
+        }
+    </style>
+    <script>
+        async function submitAIQuery(event) {
+            event.preventDefault();
+            const query = document.getElementById("aiQuery").value;
+            const response = await fetch('/ai', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query })
+            });
+            const result = await response.json();
+            document.getElementById("aiResult").innerText = JSON.stringify(result, null, 2);
+        }
+
+        async function submitPDFQuery(event) {
+            event.preventDefault();
+            const query = document.getElementById("pdfQuery").value;
+            const response = await fetch('/ask_pdf', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query })
+            });
+            const result = await response.json();
+            document.getElementById("pdfResult").innerText = JSON.stringify(result, null, 2);
+        }
+
+        async function uploadPDF(event) {
+            event.preventDefault();
+            const formData = new FormData();
+            const file = document.getElementById("pdfFile").files[0];
+            formData.append("file", file);
+
+            const response = await fetch('/pdf', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById("uploadResult").innerText = JSON.stringify(result, null, 2);
+        }
+    </script>
+</head>
+<body>
+    <h1>Doc Assistant AI</h1>
+    <br>
+    <h2>Any general query</h2>
+    <form onsubmit="submitAIQuery(event)">
+        <input type="text" id="aiQuery" placeholder="Enter your query" required>
+        <button type="submit">Submit</button>
+    </form>
+    <pre id="aiResult"></pre>
+    
+
+    <h2>Upload PDF</h2>
+    <form onsubmit="uploadPDF(event)" enctype="multipart/form-data">
+        <input type="file" id="pdfFile" required>
+        <button type="submit">Upload</button>
+    </form>
+    <pre id="uploadResult"></pre>
+
+    
+    <h2>PDF Query</h2>
+    <form onsubmit="submitPDFQuery(event)">
+        <input type="text" id="pdfQuery" placeholder="Enter your query" required>
+        <button type="submit">Submit</button>
+    </form>
+    <pre id="pdfResult"></pre>
+    
+    
+</body>
+</html>

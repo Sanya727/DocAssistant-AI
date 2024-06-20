@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question Answering</title>
+</head>
+<body>
+    <h2>Ask a Question about the PDF</h2>
+    <form action="/qa" method="post">
+        <label for="question">Question:</label><br>
+        <input type="text" id="question" name="question" required><br><br>
+        <input type="hidden" id="pdf_file" name="pdf_file" value="{{ pdf_file }}">
+        <input type="submit" value="Submit">
+    </form>
+    {% if question %}
+        <h3>Your Question:</h3>
+        <p>{{ question }}</p>
+        <h3>Answer:</h3>
+        <p>{{ answer }}</p>
+    {% endif %}
+</body>
+</html>
