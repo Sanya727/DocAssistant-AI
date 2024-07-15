@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Query</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #D7BEF5;
+    }
+    .container {
+      padding: 2rem;
+    }
+    .first {
+      color: #3b0f41;
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 50px;
+      font-weight: 450;
+      font-style: normal;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .second {
+      color: #46284e;
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 400;
+      text-shadow: 2px 1px 5px rgba(45, 17, 56, 0.5);
+    }
+    .display-4 {
+      color: purple;
+      padding-bottom: 5px;
+      padding-top: 45px;
+    }
+    .btn-outline-primary {
+      --bs-btn-color: #141414;
+  /* --bs-btn-bg: #161516; */
+  --bs-btn-border-color: #26032c;
+  --bs-btn-hover-color: #3f2546;
+  --bs-btn-hover-bg: #e8cfec;
+  --bs-btn-hover-border-color: #141414;
+  --bs-btn-focus-shadow-rgb: 49,132,253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #0a58ca;
+  --bs-btn-active-border-color: #0a53be;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #0d6efd;
+  --bs-btn-disabled-border-color: #0d6efd;
+    }
+    .btn-submit:active {
+      background-color: #D7BEF5;
+      border-color: #26032c;
+    }
+    .btn-submit:hover {
+      border-color: #26032c;
+    }
+    .modal-dialog-centered {
+      display: flex;
+      align-items: center;
+      min-height: calc(100% - 1rem);
+    }
+    .modal-dialog-centered::before {
+      content: '';
+      height: 100%;
+      margin-right: auto;
+    }
+
+    /* KEYFRAME */
+    /* @keyframes fadeInOut{
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+
+    .animate-image{
+      animation: fadeInOut 4s ease-in-out infinite;
+    } */
+
+    @keyframes scaleAnimation {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.1);
+      }
+    }
+    .animate-image {
+      animation: scaleAnimation 5s infinite alternate ease-in-out;
+      transform-origin: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnonVplMXWL0Jkkew7vjFuAUcUi_YMrVVE9A&s" class="d-block mx-lg-auto img-fluid animate-image" alt="relevant image" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6" id="writeup">
+        <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-4"><span class="first">Upload PDF</span><br><span class="second">and Ask Your Query</span></h1>
+        <!-- PDF Upload Form -->
+        <form id="pdfUploadForm" class="w-100 mb-3">
+          <input type="file" id="pdfFile" class="form-control form-control-lg mb-3" accept="application/pdf" required>
+          <button type="submit" class="btn btn-outline-primary btn-lg px-4 mt-2">Upload PDF</button>
+        </form>
+        <!-- Query Form -->
+        <form id="pdfQueryForm" class="w-100 d-none">
+          <input type="text" id="pdfQuery" class="form-control form-control-lg mb-3" placeholder="Enter your query related to PDF" required>
+          <button type="submit" class="btn btn-outline-primary btn-lg px-4 mt-2">Submit</button>
+        </form>
+        <div id="pdfUploadResult" class="mt-4"></div>
+        <div id="pdfQueryResult" class="mt-4"></div>
+      </div>
+    </div>
+  </div>
+
+
+ <!-- Modal Structure -->
+ <div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="responseModalLabel">Chatbot Response</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Response will be injected here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('pdfUploadForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const fileInput = document.getElementById('pdfFile');
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+
+    const response = await fetch('/pdf', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      document.getElementById('pdfUploadResult').innerText = `File uploaded successfully: ${result.FileName}`;
+      document.getElementById('pdfQueryForm').classList.remove('d-none');
+    } else {
+      document.getElementById('pdfUploadResult').innerText = 'Error: ' + response.statusText;
+    }
+  });
+
+  document.getElementById('pdfQueryForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const query = document.getElementById('pdfQuery').value;
+
+    const response = await fetch('/ask_pdf', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ query: query })
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      // Injecting the response into the modal
+      document.getElementById('modalBody').innerText = result.answer;
+      // Showing the modal
+      const responseModal = new bootstrap.Modal(document.getElementById('responseModal'));
+      responseModal.show();
+    } else {
+      // Injecting the error into the modal
+      document.getElementById('modalBody').innerText = 'Error: ' + response.statusText;
+      // Showing the modal
+      const responseModal = new bootstrap.Modal(document.getElementById('responseModal'));
+      responseModal.show();
+    }
+  });
+</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

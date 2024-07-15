@@ -8,7 +8,7 @@ from langchain.prompts import PromptTemplate
 import os
 
 #! Application Setup
-app = Quart(__name__, template_folder='templates')
+app = Quart(__name__, template_folder='templates',static_folder='static')
 #? variable to store the path to the database folder
 folder_path = "db"  
 embedding = FastEmbedEmbeddings()
@@ -38,11 +38,34 @@ async def index():
     return await render_template('index.html')
 
 
+
+@app.route('/genQuery')
+async def gen_query():
+    return await render_template('genQuery.html')
+@app.route('/pdfQuery')
+async def pdf_query():
+    return await render_template('pdfQuery.html')
+@app.route('/features')
+async def features():
+    return await render_template('features.html')
+@app.route('/about')
+async def about():
+    return await render_template('about.html')
+@app.route('/signin')
+async def signin():
+    return await render_template('signin.html')
+@app.route('/faq')
+async def faq():
+    return await render_template('faq.html')
+
+
+
 #! for any general query
 @app.route("/ai", methods=["POST"])
 async def ai_post():
     json_content = await request.json  #* handling req
     query = json_content.get("query")  #* extracts the value associated with the key "query" from the JSON content
+    print("value extracted")
     response = llm.invoke(query)       #* invoking lang model
     response_answer = {"Answer": response} #*dictionary
     return jsonify(response_answer)

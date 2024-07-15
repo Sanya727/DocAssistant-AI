@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="../static/style.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #D7BEF5;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .content {
+      padding: 2rem;
+      text-align: center;
+      flex: 1;
+    }
+    .header-text {
+      font-size: 2.5rem;
+      color: #3b0f41;
+      margin-bottom: 2rem;
+    }
+    .feature-item {
+      background-color: #e8cfec;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+    .feature-item:hover {
+      transform: translateY(-5px);
+    }
+    .feature-item h3 {
+      color: #3f2546;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .feature-item p {
+      color: #460b30;
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1 class="header-text">Key Features</h1>
+
+    <div class="feature-item">
+      <h3>Natural Language Processing</h3>
+      <p>Utilize advanced language models to understand and process natural language queries with high accuracy.</p>
+    </div>
+
+    <div class="feature-item">
+      <h3>PDF Query</h3>
+      <p>Extract and analyze information from PDF documents using specialized querying capabilities, making document retrieval seamless.</p>
+    </div>
+
+    <div class="feature-item">
+      <h3>Vector Stores</h3>
+      <p>Leverage Chroma vector stores to efficiently manage and search through document embeddings, enhancing search performance.</p>
+    </div>
+
+    <div class="feature-item">
+      <h3>Responsive Design</h3>
+      <p>Enjoy a user-friendly interface that adapts seamlessly across various devices, ensuring a consistent and intuitive experience.</p>
+    </div>
+
+    <div class="feature-item">
+      <h3>General Query</h3>
+      <p>Query a wide range of general questions using language models for accurate and relevant responses.</p>
+    </div>
+
+    <div class="feature-item">
+      <h3>Advanced AI Capabilities</h3>
+      <p>Deploy Langchain's advanced AI capabilities to handle complex queries and tasks efficiently.</p>
+    </div>
+
+    <div class="feature-item">
+      <h3>User Authentication</h3>
+      <p>Secure user data and interactions with robust user authentication mechanisms.</p>
+    </div>
+
+    <div class="feature-item">
+      <h3>Customizable UI</h3>
+      <p>Customize the user interface with personalized themes and settings to suit individual preferences.</p>
+    </div>
+
+    <!-- Add more feature items as needed -->
+
+    <!-- <div id="matter-canvas"></div> -->
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- to include matter.js library -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script> -->
+
+  <!-- <script>
+    // Matter.js setup
+    const { Engine, Render, Runner, Bodies, Composite } = Matter;
+
+    // Create engine
+    const engine = Engine.create();
+    const world = engine.world;
+
+    // Create renderer
+    const render = Render.create({
+      element: document.getElementById('matter-canvas'),
+      engine: engine,
+      options: {
+        width: 800,
+        height: 400,
+        wireframes: false,
+        background: '#D7BEF5'
+      }
+    }); -->
+
+    <!-- // Create bodies
+    const ground = Bodies.rectangle(400, 380, 810, 60, { isStatic: true });
+    const boxA = Bodies.rectangle(400, 200, 80, 80);
+    const boxB = Bodies.rectangle(450, 50, 80, 80);
+    const circle = Bodies.circle(300, 100, 40, { restitution: 0.9 });
+
+    // Add bodies to world
+    Composite.add(world, [ground, boxA, boxB, circle]);
+
+    // Run engine and renderer
+    Engine.run(engine);
+    Render.run(render);
+
+    // Create runner
+    const runner = Runner.create();
+    Runner.run(runner, engine);
+  </script> -->
+
+</body>
+</html>
