@@ -1,5 +1,5 @@
 # DocAssistant AI
-Welcome to the Document Assistant AI repository! This project integrates advanced language models with document processing capabilities to provide a tool for managing and querying PDF documents. This project uses Quart for the backend framework, Langchain for working with language models (LLMs), and Chroma for managing vector stores. The system can handle both general queries and PDF-specific queries, offering a versatile solution for document management and interaction.
+Welcome to the Document Assistant AI repository! This project integrates language models with document processing capabilities to provide a tool for managing and querying PDF documents. This project uses Quart for the backend framework, Langchain for working with language models (LLMs), and Chroma for managing vector stores. The system can handle both general queries and PDF-specific queries, offering a versatile solution for document management and interaction.
 
 
 
@@ -7,7 +7,7 @@ FEATURES:
 
 1. Interactive Homepage: A clean and user-friendly homepage that welcomes users to the application.
 2. AI-powered Querying: Leverage the power of the Ollama language model for general queries and document-specific questions.
-3. PDF Upload: Seamlessly upload PDF files and store them for future reference and querying.
+3. PDF Upload: Upload PDF files and store them for future reference and querying.
 4. Advanced Text Splitting: Utilizes Recursive Character Text Splitter to break down documents into manageable chunks, enhancing search and retrieval performance.
 5. Embeddings and Vector Store: Fast and efficient document embedding with FastEmbedEmbeddings and storage using Chroma for quick retrieval.
 6. Custom Prompt Templates: Tailor the interaction with the language model using customizable prompt templates to get the best responses.
