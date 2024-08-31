@@ -1,5 +1,5 @@
-# DocAssistant AI
-Welcome to the Document Assistant AI repository! This project integrates language models with document processing capabilities to provide a tool for managing and querying PDF documents. This project uses Quart for the backend framework, Langchain for working with language models (LLMs), and Chroma for managing vector stores. The system can handle both general queries and PDF-specific queries, offering a versatile solution for document management and interaction.
+# EXPLORE (Expert Processing for Language and Optimal Retrieval of Documents and Extracts)
+Welcome to the EXPLORE repository! This project integrates language models with document processing capabilities to provide a tool for managing and querying PDF documents. This project uses Quart for the backend framework, Langchain for working with language models (LLMs), and Chroma for managing vector stores. The system can handle both general queries and PDF-specific queries, offering a versatile solution for document management and interaction.
 
 
 
